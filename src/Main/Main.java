@@ -11,9 +11,10 @@ public class Main {
     public static void main(String[] args) {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //cerrar la ventana correctamente
-        //hola.
+        
         window.setResizable(false);//redimenzionar a la pantalla
         window.setTitle("Pokemon");
+        //pepepepepepeppepepepe
         
          GamePanel gamepanle = new GamePanel();
         window.add(gamepanle);// se añade al panel a la ventana
