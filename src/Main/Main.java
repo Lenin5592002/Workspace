@@ -15,6 +15,5 @@ public class Main {
         window.setLocationRelativeTo(null);// centrar
         window.setVisible(true);
         gamepanle.startGame();
-        // cambio de LORENAAA
     }
 }
