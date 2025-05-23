@@ -47,33 +47,42 @@ public class Player extends Entity {
 
     public void uptade() {
 
-        if (keyH.upPresses == true || keyH.downPresses == true || keyH.leftPresses == true
-                || keyH.rightPresses == true) {
+        if (keyH.upPresses || keyH.downPresses || keyH.leftPresses || keyH.rightPresses) {
 
             if (keyH.upPresses) {
                 direction = "up";
-                wordlY -= speed; // personaje se mueve hacia arriba
-            }
-            if (keyH.downPresses) {
-                direction = "down"; // personaje se mueve hacia abajo
-                wordlY += speed;
-            }
-            if (keyH.leftPresses) {
-                direction = "left"; // personaje se mueve hacia la izquierda
-                wordlX -= speed;
-            }
-            if (keyH.rightPresses) {
+            } else if (keyH.downPresses) {
+                direction = "down";
+            } else if (keyH.leftPresses) {
+                direction = "left";
+            } else if (keyH.rightPresses) {
                 direction = "right";
-                wordlX += speed;// personaje se mueve hacia la derecha
             }
-            spriteCounter++;
 
-            if (spriteCounter > 10) {
-                if (spriteNum == 1) {
-                    spriteNum = 2;
-                } else if (spriteNum == 2) {
-                    spriteNum = 1;
+            // Colisión
+            collisionOn = false;
+            gp.cChecker.checkTile(this);
+
+            if (!collisionOn) { // Solo moverse si NO hay colisión
+                switch (direction) {
+                    case "up":
+                        wordlY -= speed;
+                        break;
+                    case "down":
+                        wordlY += speed;
+                        break;
+                    case "left":
+                        wordlX -= speed;
+                        break;
+                    case "right":
+                        wordlX += speed;
+                        break;
                 }
+            }
+
+            spriteCounter++;
+            if (spriteCounter > 10) {
+                spriteNum = (spriteNum == 1) ? 2 : 1;
                 spriteCounter = 0;
             }
         }
