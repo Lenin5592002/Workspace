@@ -1,6 +1,7 @@
 
 package entity;
 
+import java.awt.Rectangle; //rectangulo invisible
 import java.awt.image.BufferedImage;
 
 public class Entity {
@@ -11,5 +12,7 @@ public class Entity {
     public String direction;
     public int spriteCounter = 0; // para controlar cuando cambiar la imagen
     public int spriteNum = 1;
+    public Rectangle solidArea; // rectangulo invisible
+    public boolean collision = false;
 
 }

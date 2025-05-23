@@ -5,6 +5,7 @@ import Main.KeyHandler;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import static java.lang.reflect.Array.get;
@@ -22,10 +23,17 @@ public class Player extends Entity {
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp; // se le pasa el panel de juego
         this.keyH = keyH; // se le pasa el keyhandler
+
         screenX = gp.screenWidth / 2 - (gp.titleSize / 2); // pantalla y posicion del personaje en medio
         screenY = gp.screenHeight / 2 - (gp.titleSize / 2); // pantalla y posicion del personaje en medio
+
         setDefaultValues(); // se le asignan los valores por defecto
         getPlayerImage(); // se le asignan las imagenes
+        // colision
+        // x brazos
+        // y cabeza
+        // 32 tamaño del personaje
+        solidArea = new Rectangle(8, 16, 32, 32); // rectangulo invisible
     }
 
     public void setDefaultValues() {
