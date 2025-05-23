@@ -6,8 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JPanel;
 import tile.TileManager;
 
