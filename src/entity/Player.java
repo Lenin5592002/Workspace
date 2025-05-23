@@ -22,8 +22,8 @@ public class Player extends Entity {
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp; // se le pasa el panel de juego
         this.keyH = keyH; // se le pasa el keyhandler
-        screenX = gp.screenWidth / 2; // pantalla en medio
-        screenY = gp.screenHeight / 2;
+        screenX = gp.screenWidth / 2 - (gp.titleSize / 2); // pantalla y posicion del personaje en medio
+        screenY = gp.screenHeight / 2 - (gp.titleSize / 2); // pantalla y posicion del personaje en medio
         setDefaultValues(); // se le asignan los valores por defecto
         getPlayerImage(); // se le asignan las imagenes
     }
