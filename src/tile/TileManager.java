@@ -43,13 +43,21 @@ public class TileManager {
             tile[5].collision = true; // colision con el agua
 
             tile[6] = new Tile();
-            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaborde.png"));
+            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaIzquierdaArriba.png"));
 
             tile[7] = new Tile();
             tile[7].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/arenainicio.png"));
 
             tile[8] = new Tile();
             tile[8].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/bordecespes.png"));
+
+            tile[9] = new Tile();
+            tile[9].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaIzquierdaAbajo.png"));
+            tile[9].collision = true; // colision con el agua
+
+            tile[3] = new Tile();
+            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaArriba.png"));
+            tile[3].collision = true; // colision con el agua
 
         } catch (IOException e) {
             e.printStackTrace();
