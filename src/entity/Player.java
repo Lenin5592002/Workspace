@@ -20,9 +20,6 @@ public class Player extends Entity {
     public final int screenX; // coordenadas de la pantalla a mostrar
     public final int screenY;
 
-    public final int playerWidth = 35; // persona
-    public final int playerHeight = 35;
-
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp; // se le pasa el panel de juego
         this.keyH = keyH; // se le pasa el keyhandler
@@ -114,7 +111,7 @@ public class Player extends Entity {
                 break;
         }
         // dibujar el personaje siempre en el centro de la pantalla
-        g2.drawImage(image, screenX, screenY, playerWidth, playerHeight, null);
+        g2.drawImage(image, screenX, screenY, gp.titleSize, gp.titleSize, null);
     }
 
     public void getPlayerImage() {
