@@ -5,6 +5,7 @@ import Main.KeyHandler;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import static java.lang.reflect.Array.get;
@@ -19,13 +20,23 @@ public class Player extends Entity {
     public final int screenX; // coordenadas de la pantalla a mostrar
     public final int screenY;
 
+    public final int playerWidth = 35; // persona
+    public final int playerHeight = 35;
+
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp; // se le pasa el panel de juego
         this.keyH = keyH; // se le pasa el keyhandler
+
         screenX = gp.screenWidth / 2 - (gp.titleSize / 2); // pantalla y posicion del personaje en medio
         screenY = gp.screenHeight / 2 - (gp.titleSize / 2); // pantalla y posicion del personaje en medio
+
         setDefaultValues(); // se le asignan los valores por defecto
         getPlayerImage(); // se le asignan las imagenes
+        // colision
+        // x brazos
+        // y cabeza
+        // 32 tamaño del personaje
+        solidArea = new Rectangle(8, 5, 30, 26); // rectangulo invisible
     }
 
     public void setDefaultValues() {
@@ -39,33 +50,42 @@ public class Player extends Entity {
 
     public void uptade() {
 
-        if (keyH.upPresses == true || keyH.downPresses == true || keyH.leftPresses == true
-                || keyH.rightPresses == true) {
+        if (keyH.upPresses || keyH.downPresses || keyH.leftPresses || keyH.rightPresses) {
 
             if (keyH.upPresses) {
                 direction = "up";
-                wordlY -= speed; // personaje se mueve hacia arriba
-            }
-            if (keyH.downPresses) {
-                direction = "down"; // personaje se mueve hacia abajo
-                wordlY += speed;
-            }
-            if (keyH.leftPresses) {
-                direction = "left"; // personaje se mueve hacia la izquierda
-                wordlX -= speed;
-            }
-            if (keyH.rightPresses) {
+            } else if (keyH.downPresses) {
+                direction = "down";
+            } else if (keyH.leftPresses) {
+                direction = "left";
+            } else if (keyH.rightPresses) {
                 direction = "right";
-                wordlX += speed;// personaje se mueve hacia la derecha
             }
-            spriteCounter++;
 
-            if (spriteCounter > 10) {
-                if (spriteNum == 1) {
-                    spriteNum = 2;
-                } else if (spriteNum == 2) {
-                    spriteNum = 1;
+            // Colisión
+            collisionOn = false;
+            gp.cChecker.checkTile(this);
+
+            if (!collisionOn) { // Solo moverse si NO hay colisión
+                switch (direction) {
+                    case "up":
+                        wordlY -= speed;
+                        break;
+                    case "down":
+                        wordlY += speed;
+                        break;
+                    case "left":
+                        wordlX -= speed;
+                        break;
+                    case "right":
+                        wordlX += speed;
+                        break;
                 }
+            }
+
+            spriteCounter++;
+            if (spriteCounter > 10) {
+                spriteNum = (spriteNum == 1) ? 2 : 1;
                 spriteCounter = 0;
             }
         }
@@ -94,7 +114,7 @@ public class Player extends Entity {
                 break;
         }
         // dibujar el personaje siempre en el centro de la pantalla
-        g2.drawImage(image, screenX, screenY, gp.titleSize, gp.titleSize, null);
+        g2.drawImage(image, screenX, screenY, playerWidth, playerHeight, null);
     }
 
     public void getPlayerImage() {
