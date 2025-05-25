@@ -17,7 +17,7 @@ public class TileManager {
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
-        tile = new Tile[10]; // puedes agregar mas tiles
+        tile = new Tile[100]; // puedes agregar mas tiles
         mapTileNum = new int[gp.maxWordlCol][gp.maxWordlRow]; // matriz para el mapa
         getTileImage();
         loadMap("/maps/wordl01.txt");
@@ -25,39 +25,170 @@ public class TileManager {
 
     public void getTileImage() {
         try {
-            tile[0] = new Tile();
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/arbol.png"));
-            tile[0].collision = true; // colision con el arbol
+            // arbol
+            tile[11] = new Tile();
+            tile[11].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/arbolPuntaIzquierda11.png"));
+            tile[11].collision = true; // colision con el arbol
 
-            tile[1] = new Tile();
-            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/flores.png"));
+            tile[12] = new Tile();
+            tile[12].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/arbolPuntaDerecha12.png"));
+            tile[12].collision = true; // colision con el arbol
 
-            tile[2] = new Tile();
-            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/cesped.png"));
+            tile[13] = new Tile();
+            tile[13].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/arbolMedioIzquierda13.png"));
+            tile[13].collision = true; // colision con el arbol
 
-            tile[4] = new Tile();
-            tile[4].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/arena.png"));
+            tile[14] = new Tile();
+            tile[14].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/arbolMedioDerecha14.png"));
+            tile[14].collision = true; // colision con el arbol
 
-            tile[5] = new Tile();
-            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/agua.png"));
-            tile[5].collision = true; // colision con el agua
+            tile[15] = new Tile();
+            tile[15].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/arbolIzquierdaAbajo15.png"));
+            tile[15].collision = true; // colision con el arbol
 
-            tile[6] = new Tile();
-            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaIzquierdaArriba.png"));
+            tile[16] = new Tile();
+            tile[16].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/arbolDerechaAbajo16.png"));
+            tile[16].collision = true; // colision con el arbol
 
-            tile[7] = new Tile();
-            tile[7].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/arenainicio.png"));
+            // arbol grupo
+            tile[21] = new Tile();
+            tile[21].image = ImageIO
+                    .read(getClass().getResourceAsStream("/imagenesFondo/arbolGrupoArribaIzquierda21.png"));
+            tile[21].collision = true; // colision con el arbol
 
-            tile[8] = new Tile();
-            tile[8].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/bordecespes.png"));
+            tile[22] = new Tile();
+            tile[22].image = ImageIO
+                    .read(getClass().getResourceAsStream("/imagenesFondo/arbolGrupoArribaDerecha22.png"));
+            tile[22].collision = true; // colision con el arbol
 
-            tile[9] = new Tile();
-            tile[9].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaIzquierdaAbajo.png"));
-            tile[9].collision = true; // colision con el agua
+            tile[23] = new Tile();
+            tile[23].image = ImageIO
+                    .read(getClass().getResourceAsStream("/imagenesFondo/arbolGrupoAbajoIzquierda23.png"));
+            tile[23].collision = true; // colision con el arbol
 
-            tile[3] = new Tile();
-            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaArriba.png"));
-            tile[3].collision = true; // colision con el agua
+            tile[24] = new Tile();
+            tile[24].image = ImageIO
+                    .read(getClass().getResourceAsStream("/imagenesFondo/arbolGrupoAbajoDerecha24.png"));
+            tile[24].collision = true; // colision con el arbol
+
+            // muro
+            tile[31] = new Tile();
+            tile[31].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/muro31.png"));
+            tile[31].collision = true; // colision con el muro
+
+            tile[32] = new Tile();
+            tile[32].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/muroEsquinaIzquierda32.png"));
+            tile[32].collision = true; // colision con el muro
+
+            tile[33] = new Tile();
+            tile[33].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/muroEsquinaDerecha33.png"));
+            tile[33].collision = true; // colision con el muro
+
+            tile[34] = new Tile();
+            tile[34].image = ImageIO
+                    .read(getClass().getResourceAsStream("/imagenesFondo/muroEsquinaDerechaAbajo34.png"));
+            tile[34].collision = true; // colision con el muro
+
+            tile[35] = new Tile();
+            tile[35].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/muro35.png"));
+            tile[35].collision = true; // colision con el muro
+
+            tile[36] = new Tile();
+            tile[36].image = ImageIO
+                    .read(getClass().getResourceAsStream("/imagenesFondo/muroEsquinaIzquierdaAbajo36.png"));
+            tile[36].collision = true; // colision con el muro
+
+            // camino
+            tile[41] = new Tile();
+            tile[41].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/caminoGiroIzquierda41.png"));
+
+            tile[42] = new Tile();
+            tile[42].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/caminoGiroDerecha42.png"));
+
+            tile[43] = new Tile();
+            tile[43].image = ImageIO
+                    .read(getClass().getResourceAsStream("/imagenesFondo/caminoGiroIzquierdaAbajo43.png"));
+
+            tile[44] = new Tile();
+            tile[44].image = ImageIO
+                    .read(getClass().getResourceAsStream("/imagenesFondo/caminoArriba44.png"));
+
+            tile[45] = new Tile();
+            tile[45].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/caminoCentral45.png"));
+
+            tile[46] = new Tile();
+            tile[46].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/caminpAbajo46.png"));
+
+            // flores
+            tile[60] = new Tile();
+            tile[60].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/flor1.png"));
+
+            tile[70] = new Tile();
+            tile[70].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/flor2.png"));
+
+            // pasto y hierva
+            tile[10] = new Tile();
+            tile[10].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/pasto1.png"));
+
+            tile[20] = new Tile();
+            tile[20].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/pasto2.png"));
+
+            tile[30] = new Tile();
+            tile[30].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/pasto3.png"));
+
+            tile[40] = new Tile();
+            tile[40].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/hierva1.png"));
+
+            tile[50] = new Tile();
+            tile[50].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/hierva2.png"));
+
+            // agua
+            tile[80] = new Tile();
+            tile[80].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaEsquinaIzquierda80.png"));
+            tile[80].collision = true; // colision con el agua
+
+            tile[81] = new Tile();
+            tile[81].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaArriba81.png"));
+            tile[81].collision = true; // colision con el agua
+
+            tile[82] = new Tile();
+            tile[82].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaEsquinaDerecha82.png"));
+            tile[82].collision = true; // colision con el agua
+
+            tile[83] = new Tile();
+            tile[83].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaIzquierda83.png"));
+            tile[83].collision = true; // colision con el agua
+
+            tile[84] = new Tile();
+            tile[84].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaCentral84.png"));
+
+            tile[85] = new Tile();
+            tile[85].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaDerecha85.png"));
+            tile[85].collision = true; // colision con el agua
+
+            tile[86] = new Tile();
+            tile[86].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaAbajoIzq86.png"));
+            tile[86].collision = true; // colision con el agua
+
+            tile[87] = new Tile();
+            tile[87].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaAbajo87.png"));
+            tile[87].collision = true; // colision con el agua
+
+            tile[88] = new Tile();
+            tile[88].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaAbajoDer88.png"));
+            tile[88].collision = true; // colision con el agua
+
+            tile[89] = new Tile();
+            tile[89].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaFilo89.png"));
+            tile[89].collision = true; // colision con el agua
+
+            tile[90] = new Tile();
+            tile[90].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaFilo90.png"));
+            tile[90].collision = true; // colision con el agua
+
+            tile[91] = new Tile();
+            tile[91].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/aguaFilo91.png"));
+            tile[91].collision = true; // colision con el agua
 
         } catch (IOException e) {
             e.printStackTrace();
