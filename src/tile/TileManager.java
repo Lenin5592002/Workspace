@@ -17,8 +17,8 @@ public class TileManager {
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
-        tile = new Tile[10]; // peudes agregar mas tiles
-        mapTileNum = new int[gp.maxWordlCol][gp.maxWordlRow];
+        tile = new Tile[10]; // puedes agregar mas tiles
+        mapTileNum = new int[gp.maxWordlCol][gp.maxWordlRow]; // matriz para el mapa
         getTileImage();
         loadMap("/maps/wordl01.txt");
     }
@@ -61,7 +61,7 @@ public class TileManager {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));// leer
             int row = 0;
             // recorrer el archivo
-            while (row < gp.maxWordlRow) {
+            while (row < gp.maxWordlRow) {// OJO AQUI
                 String line = br.readLine(); // leemos la fila
                 String[] numbers = line.trim().split("\\s+");// la fila a numeros, separados por espacios
                 // cada numero se convierte a entero y se guarda en el mapa
@@ -83,15 +83,20 @@ public class TileManager {
 
         while (worldCol < gp.maxWordlCol && worldRow < gp.maxWordlRow) {
             int tileNum = mapTileNum[worldCol][worldRow];
-
+            // coordenadas del tile en el mundo
             int worldX = worldCol * gp.titleSize;
             int worldY = worldRow * gp.titleSize;
-
+            // la resta es la coordenada del personaje en el mundo
+            // la suma es la simulacion de mover el mapa
             int screenX = worldX - gp.player.wordlX + gp.player.screenX;
             int screenY = worldY - gp.player.wordlY + gp.player.screenY;
-
-            g2.drawImage(tile[tileNum].image, screenX, screenY, gp.titleSize, gp.titleSize, null);
-
+            // limitar el movimiento del mapa
+            if (worldX + gp.titleSize > gp.player.wordlX - gp.player.screenX &&
+                    worldX - gp.titleSize < gp.player.wordlX + gp.player.screenX &&
+                    worldY + gp.titleSize > gp.player.wordlY - gp.player.screenY &&
+                    worldY - gp.titleSize < gp.player.wordlY + gp.player.screenY) {
+                g2.drawImage(tile[tileNum].image, screenX, screenY, gp.titleSize, gp.titleSize, null);
+            }
             worldCol++;
 
             if (worldCol == gp.maxWordlCol) {
