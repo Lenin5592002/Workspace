@@ -535,6 +535,58 @@ public class TileManager {
             tile[124].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/sillaH124.png"));
             tile[124].collision = true;
 
+            // Casa azul
+            tile[125] = new Tile();
+            tile[125].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/casaAzul125.png"));
+            tile[125].collision = true;
+
+            tile[126] = new Tile();
+            tile[126].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/casaAzul126.png"));
+            tile[126].collision = true;
+
+            tile[127] = new Tile();
+            tile[127].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/casaAzul127.png"));
+            tile[127].collision = true;
+            tile[128] = new Tile();
+            tile[128].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/casaAzul128.png"));
+            tile[128].collision = true;
+            tile[129] = new Tile();
+            tile[129].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/casaAzul129.png"));
+            tile[129].collision = true;
+            tile[130] = new Tile();
+            tile[130].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/casaAzul130.png"));
+            tile[130].collision = true;
+            tile[131] = new Tile();
+            tile[131].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/casaAzul131.png"));
+            tile[131].collision = true;
+            tile[132] = new Tile();
+            tile[132].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/casaAzul132.png"));
+            tile[132].collision = true;
+            tile[133] = new Tile();
+            tile[133].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/casaAzul133.png"));
+            tile[133].collision = true;
+            tile[134] = new Tile();
+            tile[134].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/casaAzul134.png"));
+            tile[134].collision = true;
+            tile[135] = new Tile();
+            tile[135].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/casaAzul135.png"));
+            tile[135].collision = true;
+            tile[136] = new Tile();
+            tile[136].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/casaAzul136.png"));
+            tile[136].collision = true;
+            tile[137] = new Tile();
+            tile[137].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/casaAzul137.png"));
+            tile[137].collision = true;
+            tile[138] = new Tile();
+            tile[138].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/casaAzul138.png"));
+            tile[138].collision = true;
+            tile[139] = new Tile();
+            tile[139].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/casaAzul139.png"));
+            tile[139].collision = true;
+            tile[140] = new Tile();
+            tile[140].image = ImageIO.read(getClass().getResourceAsStream("/imagenesFondo/casaAzul140.png"));
+            tile[140].collision = true;
+
         } catch (IOException e) {
             e.printStackTrace();
         }
