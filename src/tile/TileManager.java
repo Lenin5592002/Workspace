@@ -656,7 +656,7 @@ public class TileManager {
         }
         gTemp.dispose();
 
-        // 2. Aplica un filtro de blanco y negro (umbral)
+        // para poner blanco y negro el mapa
         for (int y = 0; y < temp.getHeight(); y++) {
             for (int x = 0; x < temp.getWidth(); x++) {
                 int rgb = temp.getRGB(x, y);
@@ -664,7 +664,7 @@ public class TileManager {
                 int g = (rgb >> 8) & 0xFF;
                 int b = rgb & 0xFF;
                 int gray = (r + g + b) / 3;
-                int bw = (gray > 100) ? 0xFFFFFF : 0x000000; // para ajaustar blancos y negros
+                int bw = (gray > 128) ? 0xFFFFFF : 0x000000;
                 temp.setRGB(x, y, (0xFF << 24) | bw);
             }
         }
