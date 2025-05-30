@@ -15,6 +15,9 @@ public class Main {
         window.setLocationRelativeTo(null);// centrar
         window.setVisible(true);
         gamepanle.startGame();
+        
+        //HOLAAJSJAJSAJS 
+        //soy victor
     }
 
 }
