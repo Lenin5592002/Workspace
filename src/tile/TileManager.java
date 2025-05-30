@@ -2,7 +2,10 @@ package tile;
 
 import Main.GamePanel;
 import java.awt.Graphics2D;
-import java.io.BufferedReader;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorConvertOp; //negro
+import java.awt.color.ColorSpace;//negro
+import java.io.BufferedReader; //negro
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -616,19 +619,20 @@ public class TileManager {
     }
 
     public void draw(Graphics2D g2) {
+        // 1. Dibuja el mapa normalmente en un BufferedImage temporal
+        BufferedImage temp = new BufferedImage(gp.getWidth(), gp.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D gTemp = temp.createGraphics();
+
         int worldCol = 0;
         int worldRow = 0;
 
         while (worldCol < gp.maxWordlCol && worldRow < gp.maxWordlRow) {
             int tileNum = mapTileNum[worldCol][worldRow];
-            // coordenadas del tile en el mundo
             int worldX = worldCol * gp.titleSize;
             int worldY = worldRow * gp.titleSize;
-            // la resta es la coordenada del personaje en el mundo
-            // la suma es la simulacion de mover el mapa
             int screenX = worldX - gp.player.wordlX + gp.player.screenX;
             int screenY = worldY - gp.player.wordlY + gp.player.screenY;
-            // limitar el movimiento del mapa
+
             if (worldX + gp.titleSize > gp.player.wordlX - gp.player.screenX &&
                     worldX - gp.titleSize < gp.player.wordlX + gp.player.screenX &&
                     worldY + gp.titleSize > gp.player.wordlY - gp.player.screenY &&
@@ -641,16 +645,30 @@ public class TileManager {
                 } else if (tile[tileNum].image == null) {
                     System.out.println("Tile sin imagen: " + tileNum);
                 } else {
-                    g2.drawImage(tile[tileNum].image, screenX, screenY, gp.titleSize, gp.titleSize, null);
+                    gTemp.drawImage(tile[tileNum].image, screenX, screenY, gp.titleSize, gp.titleSize, null);
                 }
             }
             worldCol++;
-
             if (worldCol == gp.maxWordlCol) {
                 worldCol = 0;
                 worldRow++;
             }
         }
+        gTemp.dispose();
+
+        // 2. Aplica un filtro de blanco y negro (umbral)
+        for (int y = 0; y < temp.getHeight(); y++) {
+            for (int x = 0; x < temp.getWidth(); x++) {
+                int rgb = temp.getRGB(x, y);
+                int r = (rgb >> 16) & 0xFF;
+                int g = (rgb >> 8) & 0xFF;
+                int b = rgb & 0xFF;
+                int gray = (r + g + b) / 3;
+                int bw = (gray > 100) ? 0xFFFFFF : 0x000000; // para ajaustar blancos y negros
+                temp.setRGB(x, y, (0xFF << 24) | bw);
+            }
+        }
+        g2.drawImage(temp, 0, 0, null);
     }
 
 }
