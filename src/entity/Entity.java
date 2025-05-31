@@ -13,6 +13,16 @@ public class Entity {
     public int spriteCounter = 0; // para controlar cuando cambiar la imagen
     public int spriteNum = 1;
     public Rectangle solidArea; // rectangulo invisible
+    public int solidAreaDefaultX,solidAreaDefaultY ;
     public boolean collisionOn = false;
+
+
+
+
+ 
+    //ESTADO DE VIDA
+    public int maxLife;
+    public int life; 
+
 
 }

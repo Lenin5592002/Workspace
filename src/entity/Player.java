@@ -43,6 +43,10 @@ public class Player extends Entity {
         speed = 4;
         direction = "down";
 
+         //ESTADO DE VIDA JUGADOR 2 VIDAS EQUIVALEN A UN CORAZON
+        maxLife = 6;
+        life = maxLife;
+
     }
 
     public void uptade() {

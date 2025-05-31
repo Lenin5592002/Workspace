@@ -2,7 +2,6 @@ package Main;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
@@ -117,6 +116,8 @@ public class Menu {
             window.pack();
             window.setLocationRelativeTo(null);
             window.setVisible(true);
+             gamepanle.requestFocusInWindow();
+             gamepanle.setupGame();
             gamepanle.startGame();
         });
     }
