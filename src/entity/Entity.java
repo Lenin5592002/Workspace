@@ -1,4 +1,3 @@
-
 package entity;
 
 import java.awt.Graphics2D;
@@ -25,9 +24,10 @@ public class Entity {
     // x brazos
     // y cabeza
     // 32 tamaño del personaje
-    public Rectangle solidArea = new Rectangle(8, 5, 30, 26); // rectangulo invisible
+    public Rectangle solidArea = new Rectangle(10, 5, 30, 26); // rectangulo invisible
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
+    public int ActionLockCounter = 0; // contador para bloquear acciones
 
     // ESTADO DE VIDA
     public int maxLife;
@@ -46,11 +46,10 @@ public class Entity {
         setAction();
         collisionOn = false; // reiniciar colision
         gp.cChecker.checkTile(this); // verificar colision con el mapa
+        gp.cChecker.checkPlayer(this); // verificar colision con el jugador
+        gp.cChecker.checkObject(this, false); // verificar colision con objetos
 
-        collisionOn = false;
-        gp.cChecker.checkTile(this);
-
-        if (!collisionOn) {// Si no hay colisión, se mueve el jugador
+        if (!collisionOn) {// Si no hay colisión, se mueve el personaje
             switch (direction) {
                 case "up":
                     worldY -= speed;
@@ -66,18 +65,12 @@ public class Entity {
                     break;
             }
         }
-    }
-
-    public BufferedImage setup(String imagePath) {
-        UtilityTool UTool = new UtilityTool();
-        BufferedImage scaledImage = null;
-        try {
-            scaledImage = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
-            scaledImage = UTool.scaleImage(scaledImage, gp.tileSize, gp.tileSize);
-        } catch (IOException e) {
-            e.printStackTrace();
+        // ANIMACIÓN: SIEMPRE QUE INTENTE MOVERSE, CAMBIA EL SPRITE
+        spriteCounter++;
+        if (spriteCounter > 12) { // Ajusta el número para la velocidad de animación
+            spriteNum = (spriteNum == 1) ? 2 : 1;
+            spriteCounter = 0;
         }
-        return scaledImage;
     }
 
     public void draw(Graphics2D g2) {
@@ -95,22 +88,29 @@ public class Entity {
                 case "up":
                     image = (spriteNum == 1) ? up1 : up2; //
                     break;
-
                 case "down":
                     image = (spriteNum == 1) ? down1 : down2;
                     break;
-
                 case "left":
                     image = (spriteNum == 1) ? left1 : left2;
                     break;
-
                 case "right":
                     image = (spriteNum == 1) ? right1 : right2;
                     break;
             }
-
             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
         }
     }
 
+    public BufferedImage setup(String imagePath) {
+        UtilityTool UTool = new UtilityTool();
+        BufferedImage scaledImage = null;
+        try {
+            scaledImage = ImageIO.read(getClass().getResourceAsStream(imagePath + ".png"));
+            scaledImage = UTool.scaleImage(scaledImage, gp.tileSize, gp.tileSize);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return scaledImage;
+    }
 }

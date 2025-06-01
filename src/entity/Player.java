@@ -2,12 +2,7 @@ package entity;
 
 import Main.GamePanel;
 import Main.KeyHandler;
-import Main.UtilityTool;
-
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import static java.lang.reflect.Array.get;
@@ -45,6 +40,19 @@ public class Player extends Entity {
 
     }
 
+    public void getPlayerImage() {
+
+        up1 = setup("/imagenesPlayer/arriba2");
+        up2 = setup("/imagenesPlayer/arriba3");
+        down1 = setup("/imagenesPlayer/abajo");
+        down2 = setup("/imagenesPlayer/abajo2");
+        right1 = setup("/imagenesPlayer/derecha2");
+        right2 = setup("/imagenesPlayer/derecha3");
+        left1 = setup("/imagenesPlayer/izquierda2");
+        left2 = setup("/imagenesPlayer/izquierda3");
+        normal = setup("/imagenesPlayer/normal");
+    }
+
     public void uptade() {
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
             if (keyH.upPressed)
@@ -56,9 +64,13 @@ public class Player extends Entity {
             else if (keyH.rightPressed)
                 direction = "right";
 
-            // Colisión
+            // Colisión tile
             collisionOn = false;
             gp.cChecker.checkTile(this);
+
+            // colision con npcs
+            int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+            interactNPC(npcIndex);
 
             if (!collisionOn) {// Si no hay colisión, se mueve el jugador
                 switch (direction) {
@@ -77,16 +89,18 @@ public class Player extends Entity {
                 }
             }
         }
-
         spriteCounter++;
         if (spriteCounter > 10) {
             spriteNum = (spriteNum == 1) ? 2 : 1;
             spriteCounter = 0;
         }
+    }
 
-        // Imprime la posición del jugador en consola (columna y fila)
-        int col = worldX / gp.tileSize;
-        int row = worldY / gp.tileSize;
+    // Método para interactuar con NPCs
+    public void interactNPC(int index) {
+        if (index != 999) { // Si hay un NPC con el que interactuar
+            System.out.println("Estas chocando con el NPC: ");
+        }
     }
 
     public void draw(Graphics2D g2) {
@@ -127,18 +141,4 @@ public class Player extends Entity {
         }
         g2.drawImage(image, screenX, screenY, null);
     }
-
-    public void getPlayerImage() {
-
-        up1 = setup("/imagenesPlayer/arriba2");
-        up2 = setup("/imagenesPlayer/arriba3");
-        down1 = setup("/imagenesPlayer/abajo");
-        down2 = setup("/imagenesPlayer/abajo2");
-        right1 = setup("/imagenesPlayer/derecha2");
-        right2 = setup("/imagenesPlayer/derecha3");
-        left1 = setup("/imagenesPlayer/izquierda2");
-        left2 = setup("/imagenesPlayer/izquierda3");
-        normal = setup("/imagenesPlayer/normal");
-    }
-
 }
