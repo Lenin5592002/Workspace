@@ -14,8 +14,9 @@ public class Npc extends Entity {
         super(gp); // se llama al constructor de la clase padre Entity
         solidArea = new Rectangle(10, 10, 30, 26);// x brazos, y cabeza
         direction = "down";
-        speed = 2;
+        speed = 1;
         getImage(); // se le asignan las imagenes
+        setDialogues(); // se le asignan los dialogos
     }
 
     public void getImage() {
@@ -28,6 +29,15 @@ public class Npc extends Entity {
         right2 = setup("/imagenesNPC/Rderecha3");
         left1 = setup("/imagenesNPC/Rizquierda2");
         left2 = setup("/imagenesNPC/Rizquierda3");
+    }
+
+    // L: este metodo se encarga de asignar los dialogos al NPC
+    public void setDialogues() {
+        dialogues[0] = "Hola, valiente :D";
+        dialogues[1] = "Así que has venido a esta \n isla para restaurar su color.";
+        dialogues[2] = "Solía ser un lugar calido aqui.";
+        dialogues[3] = "¡Encuentra las llaves!";
+        dialogues[4] = "¡Buena suerte!";
     }
 
     public void setAction() {
@@ -49,5 +59,10 @@ public class Npc extends Entity {
             }
             ActionLockCounter = 0; // reinicia el contador
         }
+    }
+
+    // L:
+    public void speak() {
+        super.speak(); // llama al metodo speak de la clase padre Entity
     }
 }

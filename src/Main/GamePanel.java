@@ -28,9 +28,10 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS = 60;
 
     // GAME STATE
-    public int gameSate;
+    public int gameState;
     public final int playState = 1;
     public final int playPause = 2;
+    public final int dialogueState = 3;// estado de dialogo
 
     // CONFIGUARCIONES DEL MUNDO
     public final int maxWordlCol = 50; // maximo de columnas del mundo
@@ -38,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int worldWidth = tileSize * maxWordlCol;
     public final int worldHeight = tileSize * maxWordlRow;
 
-    KeyHandler keyH = new KeyHandler(this);
+    public KeyHandler keyH = new KeyHandler(this);
     Thread gameThread; // nucleo del juego
     public CollissionChecker cChecker = new CollissionChecker(this);
     TileManager tileM = new TileManager(this);
@@ -64,7 +65,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         aStter.setObject();
         aStter.setNPC();
-        gameSate = playState;
+        gameState = playState;
 
     }
 
@@ -110,10 +111,10 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void uptade() {
-        if (gameSate == playState) {
+        if (gameState == playState) {
             /// player
             player.uptade();
-            ///npc
+            // L:npc
             for (int i = 0; i < npc.length; i++) {
                 if (npc[i] != null) {
                     npc[i].updateEntity();
@@ -121,7 +122,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
         }
-        if (gameSate == playPause) {
+        if (gameState == playPause) {
 
             player.uptade();
 
@@ -141,8 +142,10 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
         }
-
+        // jugador
         this.player.draw(g2);
+        // ui
+        ui.draw(g2);
         g2.dispose();
     }
 }

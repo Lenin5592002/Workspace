@@ -1,5 +1,6 @@
 package Main;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -19,6 +20,7 @@ public class UI {
     public String message = "";
     int messageCounter = 0;
     public boolean gameFinish = false;
+    public String currentDialogue = ""; // L: para el dialogo actual
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -42,18 +44,20 @@ public class UI {
     }
 
     public void draw(Graphics2D g2) {
-
         this.g2 = g2;
         g2.setFont(arial_40);
         g2.setColor(Color.red);
 
-        if (gp.gameSate == gp.playState) {
+        if (gp.gameState == gp.playState) {
             // AQUI HACE QUE SE PAUSE LE JUEGO
 
         }
-        if (gp.gameSate == gp.playPause) {
+        if (gp.gameState == gp.playPause) {
             drawPauseScreen();
-
+        }
+        // L:estado del dialogo
+        if (gp.gameState == gp.dialogueState) {
+            drawDialogueScreen(); // dibuja la pantalla de dialogo
         }
 
     }
@@ -67,6 +71,36 @@ public class UI {
 
         g2.drawString(text, x, y);
 
+    }
+
+    // L: dibuja la pantalla de dialogo
+    public void drawDialogueScreen() {
+        // L: rectangulo (mini ventana de dialogo)
+        int x = gp.tileSize * 2;// x de la ventana
+        int width = gp.screenWidth - (gp.tileSize * 4);// ancho de la ventana
+        int height = gp.tileSize * 4; // alto de la ventana
+        int y = (gp.screenHeight - height) / 4;// y de la ventana
+        drawSubWindow(x, y, width, height);
+
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 30F)); // establece la fuente del dialogo
+        x += gp.tileSize; // ajusta la x para que no se superponga con el borde
+        y += gp.tileSize; // ajusta la y para que no se superponga con el borde
+        for (String lineString : currentDialogue.split("\n")) {
+            g2.drawString(lineString, x, y); // dibuja cada linea del dialogo
+            y += 45; // espacio entre lineas
+        }
+    }
+
+    // L: dibuja un rectangulo redondeado para la ventana de dialogo
+    public void drawSubWindow(int x, int y, int width, int height) {
+        Color c = new Color(0, 0, 0, 190);
+        g2.setColor(c);
+        g2.fillRoundRect(x, y, width, height, 35, 35); // dibuja un rectangulo redondeado
+
+        c = new Color(255, 255, 255, 200); // color blanco con transparencia
+        g2.setStroke(new BasicStroke());// grosor de la linea
+        g2.setColor(c);
+        g2.drawRoundRect(x + 5, y + 5, width, height, 35, 35); // dibuja el borde del rectangulo redondeado
     }
 
     // MERODO PARA CENTAR VEL TEXTO

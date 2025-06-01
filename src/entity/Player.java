@@ -12,7 +12,7 @@ import static javax.swing.UIManager.get;
 
 public class Player extends Entity {
 
-    KeyHandler keyH;
+    public KeyHandler keyH;
     public final int screenX; // coordenadas de la pantalla a mostrar
     public final int screenY;
 
@@ -96,11 +96,15 @@ public class Player extends Entity {
         }
     }
 
-    // Método para interactuar con NPCs
-    public void interactNPC(int index) {
-        if (index != 999) { // Si hay un NPC con el que interactuar
-            System.out.println("Estas chocando con el NPC: ");
+    // L: Método para interactuar con NPCs
+    public void interactNPC(int i) {
+        if (i != 999) { // chocando con un NPC
+            if (gp.keyH.enterPressed == true) { // si se presiona enter
+                gp.gameState = gp.dialogueState; // cambia el estado del juego a dialogo
+                gp.npc[i].speak(); // llama al metodo speak del NPC
+            }
         }
+        gp.keyH.enterPressed = false; // resetea la tecla enter para evitar múltiples interacciones
     }
 
     public void draw(Graphics2D g2) {

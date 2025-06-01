@@ -1,11 +1,12 @@
 package Main;
 
+import java.awt.RenderingHints.Key;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     GamePanel gp;
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
 
     public KeyHandler(GamePanel gp) {
 
@@ -21,23 +22,51 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
-        if (code == KeyEvent.VK_P) {
-            if (gp.gameSate == gp.playState) {
-                gp.gameSate = gp.playPause;
-            } else if (gp.gameSate == gp.playPause) {
-                gp.gameSate = gp.playState;
+        if (gp.gameState == gp.playState) {
+            if (code == KeyEvent.VK_P) {
+                if (gp.gameState == gp.playState) {
+                    gp.gameState = gp.playPause;
+                } else if (gp.gameState == gp.playPause) {
+                    gp.gameState = gp.playState;
+                }
+            }
+
+            // Solo detectar movimiento si el juego está activo
+            if (gp.gameState == gp.playState) {
+                if (code == KeyEvent.VK_W) {
+                    upPressed = true;
+                }
+                if (code == KeyEvent.VK_S) {
+                    downPressed = true;
+                }
+                if (code == KeyEvent.VK_A) {
+                    leftPressed = true;
+                }
+                if (code == KeyEvent.VK_D) {
+                    rightPressed = true;
+                }
+                if (code == KeyEvent.VK_P) {
+                    gp.gameState = gp.playPause; // Pausa el juego
+                }
+                if (code == KeyEvent.VK_ENTER) {
+                    enterPressed = true; // Para detectar si se presiona Enter
+                }
             }
         }
 
-        // Solo detectar movimiento si el juego está activo
-        if (gp.gameSate == gp.playState) {
-            switch (code) {
-                case KeyEvent.VK_W -> upPressed = true;
-                case KeyEvent.VK_S -> downPressed = true;
-                case KeyEvent.VK_A -> leftPressed = true;
-                case KeyEvent.VK_D -> rightPressed = true;
+        // L: para pausar el juego
+        if (gp.gameState == gp.playPause) {
+            if (code == KeyEvent.VK_P) {
+                gp.gameState = gp.playState; // Reanuda el juego
             }
         }
+        // L: para el estado de dialogo
+        if (gp.gameState == gp.dialogueState) {
+            if (code == KeyEvent.VK_ENTER) {
+                gp.gameState = gp.playState; // Sale del estado de dialogo
+            }
+        }
+
     }
 
     @Override

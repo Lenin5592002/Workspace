@@ -28,6 +28,8 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     public int ActionLockCounter = 0; // contador para bloquear acciones
+    String dialogues[] = new String[20]; // array de dialogos
+    int dialogueIndex = 0; // indice del dialogo actual
 
     // ESTADO DE VIDA
     public int maxLife;
@@ -38,8 +40,30 @@ public class Entity {
     }
 
     public void setAction() {
-        // Este método se puede sobrescribir en las subclases para definir acciones
-        // específicas
+    }
+
+    public void speak() {
+        if (dialogues[dialogueIndex] == null) {
+            dialogueIndex = 0; // reinicia el indice del dialogo
+        }
+        gp.ui.currentDialogue = dialogues[dialogueIndex]; // asigna el dialogo actual
+        dialogueIndex++;
+
+        // cambia la direccion del NPC al hablar
+        switch (gp.player.direction) {
+            case "up":
+                direction = "down"; // cambia la direccion del NPC al hablar
+                break;
+            case "down":
+                direction = "up";
+                break;
+            case "left":
+                direction = "right";
+                break;
+            case "right":
+                direction = "left";
+                break;
+        }
     }
 
     public void updateEntity() {
